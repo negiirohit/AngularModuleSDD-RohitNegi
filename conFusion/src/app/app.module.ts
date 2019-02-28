@@ -17,6 +17,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { DishDetailComponent } from './dish-detail/dish-detail.component';
 
+//impoting dish service and will be added to providers in ng module
+import { DishService } from './services/dish.service';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +38,7 @@ import { DishDetailComponent } from './dish-detail/dish-detail.component';
     MatCardModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [DishService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
