@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Dish } from '../shared/dish';
 import { DishService } from 'src/app/services/dish.service';
 //import { DISHES } from '../shared/dishes';
+
+
+
 //now we will use services
 
 @Component({
