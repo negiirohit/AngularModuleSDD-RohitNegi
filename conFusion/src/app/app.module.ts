@@ -28,6 +28,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -71,12 +74,15 @@ import { LeaderService } from './services/leader.service';
     MatGridListModule,
     MatCardModule,
     MatButtonModule,
-    MatDialogModule,    MatFormFieldModule, 
+    MatDialogModule,    
+    MatFormFieldModule, 
+    MatProgressSpinnerModule,
     MatInputModule,
     MatCheckboxModule,
     FormsModule,
     MatSelectModule,
     MatSlideToggleModule,
+    
     ReactiveFormsModule
 
   ],
