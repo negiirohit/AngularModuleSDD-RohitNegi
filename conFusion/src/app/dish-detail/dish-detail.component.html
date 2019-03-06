@@ -59,8 +59,36 @@ fxLayoutGap.xs="0">
       <p matLine>
         <span> {{comments.author}} {{comments.date}} </span>
       </p> 
+   
     </mat-list-item>
+
+    <mat-list-item *ngIf="commentForm">
+        <p matLine>{{ commentForm.value.comment}}</p>
+        <p matLine> {{ commentForm.value.rating}} Stars</p>
+        <p matLine>-- {{commentForm.value.author}} </p>
+      </mat-list-item>
+
   </mat-list>
+  
+  <form novalidate [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+      <p>{{ commentForm.value | json }} {{ commentForm.status | json }}</p>
+      <p>    
+        <mat-form-field>
+          <input matInput formControlName="author" placeholder="Name" type="text">
+        </mat-form-field>
+
+
+        <mat-slider formControlName="rating" thumbLabel tickInterval="1" min="1" max="5" step="1" value="5">
+        </mat-slider>
+      </p>
+      <p>
+        <mat-form-field >
+          <textarea matInput formControlName="comment" placeholder="Comment" rows=12></textarea>
+        </mat-form-field>
+      </p>
+      <button type="submit" mat-button  class="background-primary text-floral-white">Submit</button>
+    </form>
+
 </div>
 
 </div>
