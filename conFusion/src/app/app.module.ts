@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar'; 
@@ -50,6 +52,7 @@ import { DishDetailComponent } from './dish-detail/dish-detail.component';
 import { DishService } from './services/dish.service';
 import { LeaderService } from './services/leader.service';
 
+import { baseURL } from './shared/baseurl';
 
 
 
@@ -84,7 +87,8 @@ import { LeaderService } from './services/leader.service';
     MatSelectModule,
     MatSlideToggleModule,
     MatSliderModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
 
   ],
   //For overlaying components
@@ -92,7 +96,9 @@ import { LeaderService } from './services/leader.service';
     LoginComponent
   ],
 
-  providers: [DishService,LeaderService],
+  providers: [DishService,LeaderService,
+              {provide: 'BaseURL', useValue: baseURL} 
+            ],
   bootstrap: [AppComponent]
 
 })

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common'; 
 import { FormControl, FormGroup, FormBuilder,Validators } from '@angular/forms';
 
 
-
+import { baseURL } from '../shared/baseurl';
 
 import { switchMap } from 'rxjs/operators';
 
@@ -53,7 +53,8 @@ export class DishDetailComponent implements OnInit {
 
   constructor(private dishservice: DishService,
               private route: ActivatedRoute,
-              private location: Location,private formBuilder: FormBuilder)
+              private location: Location,private formBuilder: FormBuilder,
+              @Inject('BaseURL') private BaseURL)
      {
       this.commentForm = this.createFormGroupWithBuilder(formBuilder);
       }
@@ -75,6 +76,7 @@ export class DishDetailComponent implements OnInit {
 
                }
   
+//Creating form
     createFormGroupWithBuilder(formBuilder: FormBuilder) {
       return formBuilder.group({
           author:  ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
@@ -84,7 +86,7 @@ export class DishDetailComponent implements OnInit {
     }
 
 
-
+    //Checking for any change in input field in form
     onValueChanged(data?: any) {
       
             if (!this.commentForm) { return; }
@@ -109,34 +111,32 @@ export class DishDetailComponent implements OnInit {
             }
           }
 
-
-
-
-    setPrevNext(dishId: string) {
-      const index = this.dishIds.indexOf(dishId);
-      this.prev = this.dishIds[(this.dishIds.length + index - 1) % this.dishIds.length];
-      this.next = this.dishIds[(this.dishIds.length + index + 1) % this.dishIds.length];
-    }
-
-  goBack(): void {
-    this.location.back();
+    onSubmit() {
+      if(this.commentForm.valid)
+      {
+        this.comment = this.commentForm.value;
+        console.log(this.comment);
+        this.dish.comments.push(this.comment);
+            this.commentForm.reset({
+              author: '',
+              comment: '',
+              rating: 5
+            });
+      }
   }
 
 
 
-  onSubmit() {
-    if(this.commentForm.valid)
-    {
-      this.comment = this.commentForm.value;
-      console.log(this.comment);
-      this.dish.comments.push(this.comment);
-          this.commentForm.reset({
-            author: '',
-            comment: '',
-            rating: 5
-          });
-    }
+setPrevNext(dishId: string) {
+  const index = this.dishIds.indexOf(dishId);
+  this.prev = this.dishIds[(this.dishIds.length + index - 1) % this.dishIds.length];
+  this.next = this.dishIds[(this.dishIds.length + index + 1) % this.dishIds.length];
 }
+
+goBack(): void {
+this.location.back();
+}
+
 
   
 }
