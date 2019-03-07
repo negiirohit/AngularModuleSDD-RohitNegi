@@ -27,7 +27,29 @@ export class DishDetailComponent implements OnInit {
   next: string;
 
   commentForm: FormGroup;
-  comment: Comment;  
+  comment: Comment; 
+  
+  
+// For Custom Validation Messages
+  formErrors = {
+    'author': '',
+    'comment':''
+  };
+
+  validationMessages = {
+    'author': {
+      'required':      'Author Name is required.',
+      'minlength':     'Author Name must be at least 2 characters long.',
+      'maxlength':     'Author Name cannot be more than 25 characters long.'
+    },
+    'comment': {
+      'required':      'Comments can not be empty',
+      'minlength':     'comment must be at least 2 characters long.',
+    }
+  };
+
+
+
 
   constructor(private dishservice: DishService,
               private route: ActivatedRoute,
@@ -43,6 +65,14 @@ export class DishDetailComponent implements OnInit {
       .subscribe(dish => 
             {  this.dish = dish; this.setPrevNext(dish.id); });
      
+
+          // Subscribe to the function onValueChanged if there is any cahnge in form 
+            this.commentForm.valueChanges
+            .subscribe(data => this.onValueChanged(data));
+      
+          this.onValueChanged(); 
+
+
                }
   
     createFormGroupWithBuilder(formBuilder: FormBuilder) {
@@ -52,6 +82,32 @@ export class DishDetailComponent implements OnInit {
           comment:['', [Validators.required,  Validators.minLength(5)] ],
       });
     }
+
+
+
+    onValueChanged(data?: any) {
+      
+            if (!this.commentForm) { return; }
+      
+            const form = this.commentForm;
+            
+            for (const field in this.formErrors) {
+      
+                      if (this.formErrors.hasOwnProperty(field)) {
+                        
+                            this.formErrors[field] = '';
+                            const control = form.get(field);
+                            if (control && control.dirty && !control.valid) {
+                                      const messages = this.validationMessages[field];
+                                      for (const key in control.errors) {
+                                                  if (control.errors.hasOwnProperty(key)) {
+                                                    this.formErrors[field] += messages[key] + ' ';
+                                                  }
+                                      }
+                        }
+                      }
+            }
+          }
 
 
 
@@ -69,14 +125,17 @@ export class DishDetailComponent implements OnInit {
 
 
   onSubmit() {
-    this.comment = this.commentForm.value;
-    console.log(this.comment);
-    this.dish.comments.push(this.comment);
-        this.commentForm.reset({
-          author: '',
-          comment: '',
-          rating: 5
-        });
+    if(this.commentForm.valid)
+    {
+      this.comment = this.commentForm.value;
+      console.log(this.comment);
+      this.dish.comments.push(this.comment);
+          this.commentForm.reset({
+            author: '',
+            comment: '',
+            rating: 5
+          });
+    }
 }
 
   
