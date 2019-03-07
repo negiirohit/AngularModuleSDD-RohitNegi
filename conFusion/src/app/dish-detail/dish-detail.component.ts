@@ -25,6 +25,7 @@ export class DishDetailComponent implements OnInit {
   dishIds: string[];
   prev: string;
   next: string;
+
   commentForm: FormGroup;
   comment: Comment;  
 
@@ -71,9 +72,11 @@ export class DishDetailComponent implements OnInit {
     this.comment = this.commentForm.value;
     console.log(this.comment);
     this.dish.comments.push(this.comment);
-    this.dish.save()
-        .subscribe(dish => { this.dish = dish; console.log(this.dish); });
-    this.commentForm.reset();
+        this.commentForm.reset({
+          author: '',
+          comment: '',
+          rating: 5
+        });
 }
 
   
