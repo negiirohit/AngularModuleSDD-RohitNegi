@@ -19,6 +19,7 @@ import { Comment } from '../shared/comment';
   styleUrls: ['./dish-detail.component.scss']
 })
 export class DishDetailComponent implements OnInit {
+  
 
   //@Input()
   dish : Dish;
@@ -28,7 +29,7 @@ export class DishDetailComponent implements OnInit {
 
   commentForm: FormGroup;
   comment: Comment; 
-  
+  errMess: any;
   
 // For Custom Validation Messages
   formErrors = {
@@ -122,6 +123,11 @@ export class DishDetailComponent implements OnInit {
               comment: '',
               rating: 5
             });
+            this.dishservice.putDish(this.dish)
+            .subscribe(dish => {
+              this.dish = dish; 
+            },
+            errmess => { this.dish = null; this.dish = null; this.errMess = <any>errmess; });
       }
   }
 

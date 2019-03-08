@@ -53,6 +53,7 @@ import { DishService } from './services/dish.service';
 import { LeaderService } from './services/leader.service';
 
 import { baseURL } from './shared/baseurl';
+import { HighlightDirective } from './directives/highlight.directive';
 
 
 
@@ -66,7 +67,8 @@ import { baseURL } from './shared/baseurl';
     HomeComponent,
     ContactComponent,
     AboutComponent,
-    LoginComponent
+    LoginComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
