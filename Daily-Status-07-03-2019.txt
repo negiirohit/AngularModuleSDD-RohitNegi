@@ -1,0 +1,6 @@
+Offline test based on HTML,CSS & Bootstrap
+
+Front-End JavaScript Frameworks: Angular : CourseEra Week 4
+	-Angular HTTP Client
+	-HTTP client Error Handling
+	-Saving changes to http server
