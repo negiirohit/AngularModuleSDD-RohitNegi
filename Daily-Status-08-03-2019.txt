@@ -1,0 +1,7 @@
+Offline test based on HTML,CSS & Bootstrap
+
+Front-End JavaScript Frameworks: Angular : CourseEra Week 4
+	-Angular Directives: 
+	-Custom Attribute directives
+	-Angular Animation
+	-CourseEra Week 4 Assignment Based on Http & Forms 

@@ -49,6 +49,11 @@
           "author": "sdafs",
           "rating": 5,
           "comment": "sadfasdfasdfsadf"
+        },
+        {
+          "author": "Test Author",
+          "rating": 5,
+          "comment": "Test Comment"
         }
       ]
     },
