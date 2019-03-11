@@ -26,7 +26,7 @@ export class ContactComponent implements OnInit {
     feedback: Feedback;
     contactType = ContactType;
   
-
+    errMess = '';
 
     formErrors = {
       'firstname': '',
